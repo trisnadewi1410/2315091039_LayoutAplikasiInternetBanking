@@ -173,7 +173,9 @@ class MainMenuScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Spasi kosong di kiri untuk menjaga keseimbangan
                   const SizedBox(width: 40),
+                  // Judul di tengah
                   const Text(
                     'Koperasi Undiksha',
                     style: TextStyle(
@@ -182,6 +184,7 @@ class MainMenuScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  // Icon logout di kanan
                   IconButton(
                     icon: const Icon(Icons.logout, color: Colors.white),
                     onPressed: () {
@@ -194,155 +197,149 @@ class MainMenuScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.all(15),
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 1,
-                            blurRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              'assets/profile_pic.jpg',
-                              width: 80,
-                              height: 80,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          const SizedBox(width: 15),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  color: const Color(0xFFE3E3F5),
-                                  width: double.infinity,
-                                  child: const Text(
-                                    'Nasabah\nNi Komang Ayu Trisna Dewi',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  padding: const EdgeInsets.all(8),
-                                  color: const Color(0xFFE3E3F5),
-                                  width: double.infinity,
-                                  child: const Text(
-                                    'Total Saldo Anda\nRp. 1200.0000',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+            Container(
+              margin: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      'assets/profile_pic.jpg',
+                      width: 80,
+                      height: 80,
+                      fit: BoxFit.cover,
                     ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.3),
-                            spreadRadius: 1,
-                            blurRadius: 5,
+                  ),
+                  const SizedBox(width: 15),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          color: const Color(0xFFE3E3F5),
+                          width: double.infinity,
+                          child: const Text(
+                            'Nasabah\nI Ketut Resika Arthana',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _buildMenuButton(Icons.book, 'Cek Saldo', Colors.blue),
-                              _buildMenuButton(Icons.send_to_mobile, 'Transfer', Colors.blue),
-                              _buildMenuButton(Icons.account_balance_wallet, 'Deposito', Colors.blue),
-                            ],
+                        ),
+                        const SizedBox(height: 5),
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          color: const Color(0xFFE3E3F5),
+                          width: double.infinity,
+                          child: const Text(
+                            'Total Saldo Anda\nRp. 1200.0000',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          const SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              _buildMenuButton(Icons.payment, 'Pembayaran', Colors.blue),
-                              _buildMenuButton(Icons.monetization_on, 'Pinjaman', Colors.blue),
-                              _buildMenuButton(Icons.analytics, 'Mutasi', Colors.blue),
-                            ],
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 15),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 15),
-                      padding: const EdgeInsets.all(15),
-                      child: Row(
-                        children: [
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Butuh Bantuan?'),
-                                Text(
-                                  '0878-1234-1024',
-                                  style: TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.phone,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Container(
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 10), 
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildBottomButton(Icons.settings, 'Setting'),
-                  _buildQRButton(),
-                  _buildBottomButton(Icons.person, 'Profile'),
+              margin: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 1,
+                    blurRadius: 5,
+                  ),
                 ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildMenuButton(Icons.book, 'Cek Saldo', Colors.blue),
+                      _buildMenuButton(Icons.send_to_mobile, 'Transfer', Colors.blue),
+                      _buildMenuButton(Icons.account_balance_wallet, 'Deposito', Colors.blue),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildMenuButton(Icons.payment, 'Pembayaran', Colors.blue),
+                      _buildMenuButton(Icons.monetization_on, 'Pinjaman', Colors.blue),
+                      _buildMenuButton(Icons.analytics, 'Mutasi', Colors.blue),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                children: [
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Butuh Bantuan?'),
+                        Text(
+                          '0878-1234-1024',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.phone,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildBottomButton(Icons.settings, 'Setting'),
+                    _buildQRButton(),
+                    _buildBottomButton(Icons.person, 'Profile'),
+                  ],
+                ),
               ),
             ),
           ],
@@ -378,7 +375,7 @@ class MainMenuScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.all(10), 
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Colors.blue,
             shape: BoxShape.circle,
@@ -386,13 +383,13 @@ class MainMenuScreen extends StatelessWidget {
           child: Icon(
             icon,
             color: Colors.white,
-            size: 22, 
+            size: 24,
           ),
         ),
-        const SizedBox(height: 5),
+        const SizedBox(height: 8),
         Text(
           label,
-          style: const TextStyle(fontSize: 12), 
+          style: const TextStyle(fontSize: 14),
         ),
       ],
     );
@@ -403,7 +400,7 @@ class MainMenuScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.all(15), 
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: const Color(0xFF1A237E),
             shape: BoxShape.circle,
@@ -411,10 +408,10 @@ class MainMenuScreen extends StatelessWidget {
           child: const Icon(
             Icons.qr_code,
             color: Colors.white,
-            size: 28, 
+            size: 20,
           ),
         ),
-        const SizedBox(height: 5), 
+        const SizedBox(height: 8),
         const Text(''),
       ],
     );
