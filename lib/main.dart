@@ -1,28 +1,51 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const KoperasiApp());
+}
 
-class MyApp extends StatelessWidget {
+class KoperasiApp extends StatelessWidget {
+  const KoperasiApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginPage());
+    return MaterialApp(
+      title: 'Koperasi Undiksha',
+      theme: ThemeData(
+        primaryColor: const Color(0xFF1A237E),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: const Color(0xFF1A237E),
+          secondary: const Color(0xFF1565C0),
+        ),
+      ),
+      home: const LoginScreen(),
+      debugShowCheckedModeBanner: false,
+    );
   }
 }
 
-class LoginPage extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   void _login() {
+    // Verifikasi username dan password
     if (_usernameController.text == "1" && _passwordController.text == "1") {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomePage()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainMenuScreen()),
+      );
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Username atau password salah!')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Username atau password salah!')),
+      );
     }
   }
 
@@ -33,129 +56,403 @@ class _LoginPageState extends State<LoginPage> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(children: [
-            Container(
-              color: Colors.blue[900],
-              height: 120,
-              alignment: Alignment.center,
-              child: Text("Koperasi Undiksha", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(height: 20),
-            Image.asset('assets/logo.png', width: 120, height: 120),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(children: [
-                _inputField("Username", _usernameController),
-                SizedBox(height: 10),
-                _inputField("Password", _passwordController, obscureText: true),
-                SizedBox(height: 20),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue[900],
-                    minimumSize: Size(double.infinity, 45),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                  ),
-                  onPressed: _login,
-                  child: Text("Login", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+          Column(
+            children: [
+              _buildStatusBar(),
+              Container(
+                color: Colors.blue[900],
+                height: 120,
+                alignment: Alignment.center,
+                child: const Text(
+                  "Koperasi Undiksha",
+                  style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold),
                 ),
-              ]),
-            ),
-          ]),
-          Padding(
+              ),
+              const SizedBox(height: 20),
+
+              Image.asset(
+                'assets/logo.png',
+                width: 120,
+                height: 120,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      alignment: Alignment.centerLeft,
+                      child: const Text("Username", style: TextStyle(fontSize: 16)),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue[900]!),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        controller: _usernameController,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.all(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 5),
+                      alignment: Alignment.centerLeft,
+                      child: const Text("Password", style: TextStyle(fontSize: 16)),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue[900]!),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: TextField(
+                        controller: _passwordController,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.all(10),
+                        ),
+                        obscureText: true,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue[900]!),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue[900],
+                          minimumSize: const Size(150, 45),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                        ),
+                        onPressed: _login,
+                        child: const Text("Login", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          const Padding(
             padding: EdgeInsets.all(20),
-            child: Text("Copyright © 2025 Koperasi Undiksha", style: TextStyle(color: Colors.grey)),
+            child: Text(
+              "Copyright © 2025 Koperasi Undiksha",
+              style: TextStyle(color: Colors.grey),
+            ),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _inputField(String label, TextEditingController controller, {bool obscureText = false}) {
+class MainMenuScreen extends StatelessWidget {
+  const MainMenuScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        color: Colors.grey[200],
+        child: Column(
+          children: [
+            _buildStatusBar(),
+            Container(
+              color: const Color(0xFF1A237E),
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(width: 40),
+                  const Text(
+                    'Koperasi Undiksha',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.logout, color: Colors.white),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.all(15),
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset(
+                              'assets/profile_pic.jpg',
+                              width: 80,
+                              height: 80,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const SizedBox(width: 15),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  color: const Color(0xFFE3E3F5),
+                                  width: double.infinity,
+                                  child: const Text(
+                                    'Nasabah\nNi Komang Ayu Trisna Dewi',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  color: const Color(0xFFE3E3F5),
+                                  width: double.infinity,
+                                  child: const Text(
+                                    'Total Saldo Anda\nRp. 1200.0000',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              _buildMenuButton(Icons.book, 'Cek Saldo', Colors.blue),
+                              _buildMenuButton(Icons.send_to_mobile, 'Transfer', Colors.blue),
+                              _buildMenuButton(Icons.account_balance_wallet, 'Deposito', Colors.blue),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              _buildMenuButton(Icons.payment, 'Pembayaran', Colors.blue),
+                              _buildMenuButton(Icons.monetization_on, 'Pinjaman', Colors.blue),
+                              _buildMenuButton(Icons.analytics, 'Mutasi', Colors.blue),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        children: [
+                          const Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Butuh Bantuan?'),
+                                Text(
+                                  '0878-1234-1024',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.blue,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Icon(
+                              Icons.phone,
+                              color: Colors.white,
+                              size: 30,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(vertical: 10), 
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildBottomButton(Icons.settings, 'Setting'),
+                  _buildQRButton(),
+                  _buildBottomButton(Icons.person, 'Profile'),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuButton(IconData icon, String label, Color color) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 16)),
         Container(
+          width: 60,
+          height: 60,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.blue[900]!),
-            borderRadius: BorderRadius.circular(12),
+            color: color,
+            borderRadius: BorderRadius.circular(10),
           ),
-          child: TextField(
-            controller: controller,
-            obscureText: obscureText,
-            decoration: InputDecoration(border: InputBorder.none, contentPadding: EdgeInsets.all(10)),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 30,
           ),
         ),
+        const SizedBox(height: 5),
+        Text(label),
+      ],
+    );
+  }
+
+  Widget _buildBottomButton(IconData icon, String label) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10), 
+          decoration: BoxDecoration(
+            color: Colors.blue,
+            shape: BoxShape.circle,
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 22, 
+          ),
+        ),
+        const SizedBox(height: 5),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 12), 
+        ),
+      ],
+    );
+  }
+
+  Widget _buildQRButton() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(15), 
+          decoration: BoxDecoration(
+            color: const Color(0xFF1A237E),
+            shape: BoxShape.circle,
+          ),
+          child: const Icon(
+            Icons.qr_code,
+            color: Colors.white,
+            size: 28, 
+          ),
+        ),
+        const SizedBox(height: 5), 
+        const Text(''),
       ],
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Koperasi Undiksha"), backgroundColor: Colors.blue[900], actions: [IconButton(icon: Icon(Icons.logout), onPressed: () {})]),
-      body: SingleChildScrollView(
-        child: Column(
+Widget _buildStatusBar() {
+  return Container(
+    color: Colors.black,
+    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text(
+          '5:13 PM',
+          style: TextStyle(color: Colors.white),
+        ),
+        Row(
           children: [
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Row(children: [
-                ClipOval(
-                  child: Image.network('https://example.com/profile.jpg', width: 80, height: 80, fit: BoxFit.cover),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Text("Nasabah", style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text("I Ketut Resika Arthana"),
-                    SizedBox(height: 5),
-                    Text("Total Saldo Anda", style: TextStyle(fontWeight: FontWeight.bold)),
-                    Text("Rp. 1.200.000"),
-                  ]),
-                ),
-              ]),
-            ),
-            GridView.count(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              crossAxisCount: 3,
-              children: [
-                _menuItem(Icons.account_balance_wallet, "Cek Saldo"),
-                _menuItem(Icons.sync_alt, "Transfer"),
-                _menuItem(Icons.account_balance, "Deposito"),
-                _menuItem(Icons.payment, "Pembayaran"),
-                _menuItem(Icons.monetization_on, "Peminjaman"),
-                _menuItem(Icons.history, "Mutasi"),
-              ],
+            const Icon(Icons.access_alarm, color: Colors.white, size: 16),
+            const SizedBox(width: 8),
+            const Icon(Icons.bluetooth, color: Colors.white, size: 16),
+            const SizedBox(width: 8),
+            const Icon(Icons.wifi, color: Colors.white, size: 16),
+            const SizedBox(width: 8),
+            const Icon(Icons.signal_cellular_alt, color: Colors.white, size: 16),
+            const SizedBox(width: 8),
+            Container(
+              width: 20,
+              height: 10,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(3),
+              ),
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
-          BottomNavigationBarItem(icon: Icon(Icons.qr_code), label: "QR Code"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
-        ],
-      ),
-    );
-  }
-
-  Widget _menuItem(IconData icon, String label) {
-    return Container(
-      margin: EdgeInsets.all(5),
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 35, color: Colors.blue),
-          SizedBox(height: 5),
-          Text(label, style: TextStyle(fontSize: 12))
-        ],
-      ),
-    );
-  }
+      ],
+    ),
+  );
 }
