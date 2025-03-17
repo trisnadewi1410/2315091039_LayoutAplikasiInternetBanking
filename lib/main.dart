@@ -70,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 20),
 
-              Image.asset(
-                'assets/logo.png',
+              Image.network(
+              'https://raw.githubusercontent.com/trisnadewi1410/Trisna-PersonalWebsite/refs/heads/main/img/logo.png.png',
                 width: 120,
                 height: 120,
               ),
@@ -154,6 +154,13 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+  Widget _buildStatusBar() {
+    return Container(
+      height: 20,
+      color: Colors.blue[900],
+    );
+  }
 }
 
 class MainMenuScreen extends StatelessWidget {
@@ -173,9 +180,7 @@ class MainMenuScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Spasi kosong di kiri untuk menjaga keseimbangan
                   const SizedBox(width: 40),
-                  // Judul di tengah
                   const Text(
                     'Koperasi Undiksha',
                     style: TextStyle(
@@ -184,7 +189,6 @@ class MainMenuScreen extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  // Icon logout di kanan
                   IconButton(
                     icon: const Icon(Icons.logout, color: Colors.white),
                     onPressed: () {
@@ -215,12 +219,14 @@ class MainMenuScreen extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.asset(
-                      'assets/profile_pic.jpg',
-                      width: 80,
-                      height: 80,
-                      fit: BoxFit.cover,
-                    ),
+                    child: 
+                    Image.network(
+                    'https://raw.githubusercontent.com/trisnadewi1410/Trisna-PersonalWebsite/main/img/foto1.jpg',
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+)
+
                   ),
                   const SizedBox(width: 15),
                   Expanded(
@@ -232,7 +238,7 @@ class MainMenuScreen extends StatelessWidget {
                           color: const Color(0xFFE3E3F5),
                           width: double.infinity,
                           child: const Text(
-                            'Nasabah\nI Ketut Resika Arthana',
+                            'Nasabah\nNi Komang Ayu Trisna',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -412,44 +418,15 @@ class MainMenuScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Text(''),
+        const Text('QR Code'), // Menambahkan label untuk QR button
       ],
     );
   }
-}
 
-Widget _buildStatusBar() {
-  return Container(
-    color: Colors.black,
-    padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Text(
-          '5:13 PM',
-          style: TextStyle(color: Colors.white),
-        ),
-        Row(
-          children: [
-            const Icon(Icons.access_alarm, color: Colors.white, size: 16),
-            const SizedBox(width: 8),
-            const Icon(Icons.bluetooth, color: Colors.white, size: 16),
-            const SizedBox(width: 8),
-            const Icon(Icons.wifi, color: Colors.white, size: 16),
-            const SizedBox(width: 8),
-            const Icon(Icons.signal_cellular_alt, color: Colors.white, size: 16),
-            const SizedBox(width: 8),
-            Container(
-              width: 20,
-              height: 10,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(3),
-              ),
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
+  Widget _buildStatusBar() {
+    return Container(
+      height: 20,
+      color: Colors.blue[900],
+    );
+  }
 }
