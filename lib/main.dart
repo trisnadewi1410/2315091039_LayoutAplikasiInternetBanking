@@ -36,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() {
-    // Verifikasi username dan password
     if (_usernameController.text == "1" && _passwordController.text == "1") {
       Navigator.pushReplacement(
         context,
@@ -69,64 +68,21 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-
               Image.network(
-              'https://raw.githubusercontent.com/trisnadewi1410/Trisna-PersonalWebsite/refs/heads/main/img/logo.png.png',
+                'https://raw.githubusercontent.com/trisnadewi1410/Trisna-PersonalWebsite/main/img/logo.png.png',
                 width: 120,
                 height: 120,
               ),
-
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      alignment: Alignment.centerLeft,
-                      child: const Text("Username", style: TextStyle(fontSize: 16)),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue[900]!),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: TextField(
-                        controller: _usernameController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(10),
-                        ),
-                      ),
-                    ),
+                    _buildTextField("Username", _usernameController, false),
                     const SizedBox(height: 10),
-
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 5),
-                      alignment: Alignment.centerLeft,
-                      child: const Text("Password", style: TextStyle(fontSize: 16)),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue[900]!),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: TextField(
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          contentPadding: EdgeInsets.all(10),
-                        ),
-                        obscureText: true,
-                      ),
-                    ),
+                    _buildTextField("Password", _passwordController, true),
                     const SizedBox(height: 20),
-
-                    Container(
+                    SizedBox(
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.blue[900]!),
-                        borderRadius: BorderRadius.circular(30),
-                      ),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.blue[900],
@@ -137,12 +93,25 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: const Text("Login", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
                       ),
                     ),
+                    const SizedBox(height: 10),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text("Daftar Mbanking", style: TextStyle(color: Colors.blue)),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text("Lupa Password?", style: TextStyle(color: Colors.blue)),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               ),
             ],
           ),
-
           const Padding(
             padding: EdgeInsets.all(20),
             child: Text(
@@ -159,6 +128,30 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       height: 20,
       color: Colors.blue[900],
+    );
+  }
+
+  Widget _buildTextField(String label, TextEditingController controller, bool obscure) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: const TextStyle(fontSize: 16)),
+        const SizedBox(height: 5),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.blue[900]!),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: TextField(
+            controller: controller,
+            obscureText: obscure,
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.all(10),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -250,7 +243,7 @@ class MainMenuScreen extends StatelessWidget {
                           color: const Color(0xFFE3E3F5),
                           width: double.infinity,
                           child: const Text(
-                            'Total Saldo Anda\nRp. 1200.0000',
+                            'Total Saldo Anda\nRp. 5.200.000.000',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
@@ -310,7 +303,7 @@ class MainMenuScreen extends StatelessWidget {
                       children: [
                         Text('Butuh Bantuan?'),
                         Text(
-                          '0878-1234-1024',
+                          '0812-5959-2736',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
@@ -418,7 +411,7 @@ class MainMenuScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        const Text('QR Code'), // Menambahkan label untuk QR button
+        const Text('QR Code'), 
       ],
     );
   }
