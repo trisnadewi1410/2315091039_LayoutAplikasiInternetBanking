@@ -36,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordController = TextEditingController();
 
   void _login() {
-    if (_usernameController.text == "1" && _passwordController.text == "1") {
+    if (_usernameController.text == "2315091039" && _passwordController.text == "2315091039") {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainMenuScreen()),
